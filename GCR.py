@@ -38,6 +38,7 @@ class Sample:
 
     def getTarget(self):
         tar = self.Target.split(',')
+        print tar
         return [int(i) for i in tar]
 
 
@@ -82,7 +83,7 @@ def init():
 
     ins = 256
     hids = ins * 2 / 3
-    outs = 33
+    outs = 26
 
     net = buildNetwork(ins, hids, outs, bias=True, outclass=SoftmaxLayer)
     ds = SupervisedDataSet(ins, outs)
@@ -96,8 +97,9 @@ def init():
         params = Params(r[1])
         params_list.append(params)
 
-    params = params_list[len(params_list) - 1]
-    net._setParameters(params.getWeights())
+    if len(params_list) != 0:
+        params = params_list[len(params_list) - 1]
+        net._setParameters(params.getWeights())
     trainer = BackpropTrainer(net, ds)
 
     if len(samples) > 0:
@@ -119,7 +121,7 @@ def which(dim):
     plt.title("Graph")
     labels = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q',
               'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z']
-    x = range(33)
+    x = range(26)
     plt.xticks(x, labels)
     plt.bar(x, out)
 
