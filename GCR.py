@@ -135,7 +135,8 @@ def train():
     errors = []
     while error > 0.00001:
         error = trainer.train()
-        it = it + 1
+        it += 1
+        print "Iteration: " + str(it), "Error: " + str(error)
         iterations.append(it)
         errors.append(error)
 
